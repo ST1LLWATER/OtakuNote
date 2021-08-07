@@ -7,9 +7,10 @@ body {
 .cards {
   width: 100%;
   display: flex;
-  margin-bottom: auto;
-  /* justify-content: flex-start; */
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: auto;
 }
 
 #input_form {

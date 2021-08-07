@@ -13,7 +13,7 @@ function Card(props) {
       <div
         className="card_outer"
         style={{
-          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
     url(${props.url}) no-repeat center center/cover`,
         }}
       >
@@ -21,9 +21,14 @@ function Card(props) {
         <div className="card_content">
           <h1>{props.name}</h1>
           <div className="genre">
-            {props.genre.map((item, index) => {
-              return <p key={index}>{item}</p>;
-            })}
+            <p>
+              {props.genre.map((item, index) => {
+                {
+                  /* return <p key={index}>{item}</p>; */
+                }
+                return item + " ";
+              })}
+            </p>
           </div>
           <div className="card_details">
             <div className="card_rating">

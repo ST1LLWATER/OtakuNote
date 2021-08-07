@@ -86,7 +86,6 @@ function Input() {
 
   useEffect(() => {
     dispatch({ type: "LOAD_ANIMES" });
-    console.log("Hello World");
   }, []);
 
   return (
