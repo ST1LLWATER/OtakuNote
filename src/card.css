@@ -12,16 +12,16 @@ background: linear-gradient(to right, #414345, #232526); */
 
 .card_outer {
   position: relative;
-  margin: 10px;
+  margin: 10px auto;
   overflow: hidden;
   width: 250px;
   height: 370px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 .card_content_cover {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));

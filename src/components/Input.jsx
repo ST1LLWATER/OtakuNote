@@ -49,25 +49,25 @@ function Input() {
       .then((r) => r.json())
       .then((data) => {
         console.log("data returned:", data);
-        setData(data);
-        dispatch({
-          type: "ADD_ANIME",
-          anime: {
-            name: data.data.Media.title.english
-              ? data.data.Media.title.english
-              : data.data.Media.title.romaji,
-            url: data.data.Media.coverImage.extraLarge,
-            genre: data.data.Media.genres,
-            aid: data.data.Media.id,
-            rating: data.data.Media.averageScore,
-          },
-        });
+        if (data.errors) {
+          alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
+        } else {
+          setData(data);
+          dispatch({
+            type: "ADD_ANIME",
+            anime: {
+              name: data.data.Media.title.english
+                ? data.data.Media.title.english
+                : data.data.Media.title.romaji,
+              url: data.data.Media.coverImage.extraLarge,
+              genre: data.data.Media.genres,
+              aid: data.data.Media.id,
+              rating: data.data.Media.averageScore,
+            },
+          });
+        }
       });
   }
-
-  // useEffect(() => {
-  //   dispatch({ type: "LOAD_ANIME" });
-  // });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -81,9 +81,13 @@ function Input() {
   useEffect(() => {
     if (animeName) {
       DataFetcher(animeName);
-      console.log(data);
     }
   }, [animeName]);
+
+  useEffect(() => {
+    dispatch({ type: "LOAD_ANIMES" });
+    console.log("Hello World");
+  }, []);
 
   return (
     <>
@@ -91,6 +95,7 @@ function Input() {
         <input
           id="name"
           type="text"
+          name={"animeName"}
           value={name}
           placeholder="Anime Name"
           onChange={(e) => setName(e.target.value)}

@@ -1,7 +1,6 @@
 import Card from "./Card";
 import { AnimeContext } from "../contexts/AnimeContext";
 import { useContext } from "react";
-import { computeHeadingLevel } from "@testing-library/react";
 
 function Cards() {
   const { animes } = useContext(AnimeContext);
@@ -13,6 +12,7 @@ function Cards() {
           <Card
             name={anime.name}
             id={anime.id}
+            key={anime.id}
             anime_id={anime.aid}
             genre={anime.genre}
             rating={anime.rating}

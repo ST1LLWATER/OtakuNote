@@ -8,7 +8,7 @@ body {
   width: 100%;
   display: flex;
   margin-bottom: auto;
-  justify-content: center;
+  /* justify-content: flex-start; */
   flex-wrap: wrap;
 }
 
@@ -27,6 +27,7 @@ body {
   outline: none;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;

@@ -11,24 +11,24 @@ function Card(props) {
   return (
     <>
       <div
-        class="card_outer"
+        className="card_outer"
         style={{
           background: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
     url(${props.url}) no-repeat center center/cover`,
         }}
       >
-        <div class="card_content_cover"></div>
-        <div class="card_content">
+        <div className="card_content_cover"></div>
+        <div className="card_content">
           <h1>{props.name}</h1>
           <div className="genre">
-            {props.genre.map((item) => {
-              return <p>{item}</p>;
+            {props.genre.map((item, index) => {
+              return <p key={index}>{item}</p>;
             })}
           </div>
-          <div class="card_details">
-            <div class="card_rating">
+          <div className="card_details">
+            <div className="card_rating">
               <p>{props.rating / 10}</p>
-              <i class="fas fa-star"></i>
+              <i className="fas fa-star"></i>
             </div>
           </div>
           <button id="delete" onClick={handleDelete}>
