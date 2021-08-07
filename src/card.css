@@ -12,10 +12,12 @@ background: linear-gradient(to right, #414345, #232526); */
 
 .card_outer {
   position: relative;
-  margin: 10px;
+  user-select: none;
+  margin: 20px 0;
   overflow: hidden;
-  width: 250px;
-  height: 370px;
+  /* overflow-x: auto; */
+  width: 300px;
+  height: 420px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -30,23 +32,21 @@ background: linear-gradient(to right, #414345, #232526); */
   height: 65%;
   bottom: 0;
   padding: 5px;
+  z-index: -1;
 }
 
 .card_content {
   color: white;
-  position: absolute;
-  height: 35%;
-  padding: 5px;
+  padding: 5px 10px;
   width: 100%;
-  bottom: 0;
 }
 
 .card_outer .card_content h1 {
   /* margin-top: 15px; */
   font-size: 1.3rem;
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+  /* white-space: nowrap;
+  overflow: hidden; */
   display: block;
   text-overflow: ellipsis;
   font-family: "Kanit", sans-serif;
@@ -55,28 +55,41 @@ background: linear-gradient(to right, #414345, #232526); */
 }
 
 .card_content .genre p {
-  word-spacing: 3px;
-  margin-right: 4px;
   letter-spacing: 0.2px;
   font-family: "Commissioner", sans-serif;
 }
 
 .genre {
   display: flex;
+  overflow-x: auto;
   width: 100%;
+  cursor: pointer;
+  scrollbar-width: none;
 }
 
-.genre p {
+.genre::-webkit-scrollbar {
+  /* width: 0;
+  height: 0; */
+  display: none;
+}
+
+.genre::-moz-scrollbar {
+  width: 0;
+  height: 0;
+}
+*/ .genre_item {
   /* width: fit-content; */
-  overflow: hidden;
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .card_details {
   display: flex;
-  padding: 10px 0;
-  flex-direction: row-reverse;
+  width: 100%;
+  font-size: 0.9rem;
+  justify-content: space-between;
+  /* flex-direction: row-reverse; */
 }
 
 .card_rating {
@@ -84,16 +97,16 @@ background: linear-gradient(to right, #414345, #232526); */
   align-items: center;
   width: 20%;
   display: flex;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   font-weight: 100;
 }
 
 .card_rating i {
   margin-left: 3px;
-  font-size: 0.8rem;
+  /* font-size: 0.8rem; */
 }
 
-#delete {
+/* #delete {
   width: 90%;
   background-color: red;
   outline: none;
@@ -115,4 +128,4 @@ background: linear-gradient(to right, #414345, #232526); */
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
-}
+} */

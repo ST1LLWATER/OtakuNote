@@ -1,30 +1,35 @@
 body {
-  background: #232526;
-  background: -webkit-linear-gradient(to right, #414345, #232526);
-  background: linear-gradient(to right, #414345, #232526);
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  font-family: "Rubik", sans-serif !important;
+}
+.cover {
+  width: 100vw;
 }
 
 .cards {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: auto;
+  /* max-width: 1920px; */
 }
 
-#input_form {
+.form {
+  max-width: 100%;
+}
+
+/* #input_form {
   display: flex;
   justify-content: center;
   margin: 20px;
-}
+} */
 
-#input_form button {
+/* #input_form button {
   padding: 2px 5px;
   font-weight: bold;
   font-family: "Montserrat", sans-serif;
-  letter-spacing: 0.7px;
-  color: #2196f3;
+  letter-spacing: 0.7px; */
+/* color: #2196f3; */
+/* color: white;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -33,15 +38,18 @@ body {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-}
-
-#input_form button:hover {
   background-color: #2196f3;
-  color: white;
-}
+} */
 
-#name {
-  padding: 5px 8px;
-  width: 50%;
+/* #input_form button:hover { */
+/* background-color: #2196f3; */
+/* background-color: #ff2626;
+  color: white;
+} */
+
+/* #name {
+  padding: 10px 8px;
+  border: none;
+  outline: none;
   margin: 0 10px;
-}
+} */

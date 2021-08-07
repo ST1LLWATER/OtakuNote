@@ -6,7 +6,7 @@ import AnimeContextProvider from "./contexts/AnimeContext";
 function App() {
   return (
     <AnimeContextProvider>
-      <div className="cover">
+      <div className="cover ">
         <div className="form">
           <Input />
         </div>
