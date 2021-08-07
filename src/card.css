@@ -57,6 +57,7 @@ background: linear-gradient(to right, #414345, #232526); */
 .card_content .genre p {
   letter-spacing: 0.2px;
   font-family: "Commissioner", sans-serif;
+  white-space: nowrap;
 }
 
 .genre {
