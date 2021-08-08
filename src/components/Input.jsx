@@ -1,3 +1,4 @@
+import { computeHeadingLevel } from "@testing-library/react";
 import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
 
@@ -171,7 +172,13 @@ function Input() {
               } else {
                 //If Safe Mode Is ON Ask Password To turn it off
                 let password = prompt("ENTER PASSWORD");
-                authenticator({ type: "CHECK_PASSWORD", payload: password });
+                if (password === null) {
+                  return;
+                } else if (password === "") {
+                  return;
+                } else {
+                  authenticator({ type: "CHECK_PASSWORD", payload: password });
+                }
               }
             }}
           >
