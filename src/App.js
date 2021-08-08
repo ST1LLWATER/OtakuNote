@@ -1,18 +1,19 @@
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Input from "./components/Input";
-import Cards from "./components/Cards";
-import AnimeContextProvider from "./contexts/AnimeContext";
+import CurrentCalendar from "./components/CurrentCalendar";
+import CurrentCalendarRenderer from "./components/CurrentCalendarRenderer";
+import Nav from "./components/Nav";
+import Watchlist from "./components/Watchlist";
 
 function App() {
   return (
-    <AnimeContextProvider>
-      <div className="cover">
-        <div className="form">
-          <Input />
-        </div>
-        <Cards />
-      </div>
-    </AnimeContextProvider>
+    <BrowserRouter>
+      <Nav />
+      <Switch>
+        <Route exact path="/" component={Watchlist} />
+        <Route exact path="/current" component={CurrentCalendarRenderer} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

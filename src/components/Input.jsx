@@ -1,45 +1,45 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
+import CurrentCalendar from "./CurrentCalendar";
 
 function Input() {
   const [name, setName] = useState("");
   const [animeName, setAnimeName] = useState("");
   const firstUpdate = useRef(true);
   const { dispatch, auth, authenticator } = useContext(AnimeContext);
-
   //FETCHING DATA FROM API AND SENDING TO REDUCER TO ADD IT TO ANIMES STATE OF REDUCER
   function DataFetcher(name) {
     const query = `query($name: String, $status: MediaStatus) {         
-            Media(search: $name, type: ANIME, status: $status) {
-              id,
-              title {
-                english,
-                romaji,
-              },
-              status,
-              startDate {
-                year,
-                month,
-                day
-              },
-              averageScore,
-              type,
-              genres,
-              isAdult,
-              episodes,
-              nextAiringEpisode {
-                id,
-                airingAt,
-                timeUntilAiring
-              },
-              bannerImage,
-              coverImage {
-                large,
-                extraLarge
-              }
-            }
-          
-          }`;
+      Media(search: $name, type: ANIME, status: $status) {
+        id,
+        title {
+          english,
+          romaji,
+        },
+        status,
+        startDate {
+          year,
+          month,
+          day
+        },
+        averageScore,
+        type,
+        genres,
+        isAdult,
+        episodes,
+        nextAiringEpisode {
+          id,
+          airingAt,
+          timeUntilAiring
+        },
+        bannerImage,
+        coverImage {
+          large,
+          extraLarge
+        }
+      }
+    
+    }`;
 
     fetch("https://graphql.anilist.co", {
       method: "POST",
@@ -54,7 +54,6 @@ function Input() {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log("data returned:", data);
         if (data.errors || (auth.safeMode ? data.data.Media.isAdult : 0)) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
@@ -66,16 +65,16 @@ function Input() {
                 : data.data.Media.title.romaji,
               url: data.data.Media.coverImage.extraLarge,
               genre: data.data.Media.genres,
-              aid: data.data.Media.id,
+              // aid: data.data.Media.id,
               rating: data.data.Media.averageScore,
               episodes: data.data.Media.episodes,
               date: data.data.Media.startDate,
+              id: Date.now(),
             },
           });
         }
       });
   }
-
   //Taking input from form and adding the requested name to animeName state and clearing the form input
   function handleSubmit(e) {
     e.preventDefault();

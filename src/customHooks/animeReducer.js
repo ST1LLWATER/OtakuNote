@@ -10,16 +10,17 @@ function animeReducer(state, action) {
       }
 
     case "ADD_ANIME":
+      console.log(action.anime);
       let stateCopy = [
         {
           name: action.anime.name,
           genre: action.anime.genre,
           url: action.anime.url,
-          aid: action.anime.aid,
+          // aid: action.anime.aid,
           rating: action.anime.rating,
           episodes: action.anime.episodes,
           date: action.anime.date,
-          id: Date.now(),
+          id: action.anime.id,
         },
         ...state,
       ];

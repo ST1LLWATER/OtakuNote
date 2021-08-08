@@ -17,39 +17,53 @@ body {
   max-width: 100%;
 }
 
-/* #input_form {
+nav {
   display: flex;
-  justify-content: center;
-  margin: 20px;
-} */
-
-/* #input_form button {
-  padding: 2px 5px;
-  font-weight: bold;
-  font-family: "Montserrat", sans-serif;
-  letter-spacing: 0.7px; */
-/* color: #2196f3; */
-/* color: white;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  background-color: #2196f3;
-} */
-
-/* #input_form button:hover { */
-/* background-color: #2196f3; */
-/* background-color: #ff2626;
+  height: 77px;
+  position: sticky;
+  top: 0;
+  background-color: black;
   color: white;
+  width: 100%;
+  transition: all 0.3s ease-in;
+  z-index: 100;
+}
+
+.nav-content {
+  display: flex;
+  width: 95%;
+  justify-content: center;
+  color: white;
+  margin: auto;
+}
+
+/* .brand a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  margin-right: auto;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  border: 1px solid white;
+  user-select: none;
+  cursor: pointer;
 } */
 
-/* #name {
-  padding: 10px 8px;
-  border: none;
-  outline: none;
+.nav-items {
+  list-style: none;
+  display: flex;
+  margin: auto 0 auto auto;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  font-size: 1.2rem;
   margin: 0 10px;
-} */
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
