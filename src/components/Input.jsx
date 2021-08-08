@@ -146,13 +146,13 @@ function Input() {
         <div className="buttons flex justify-center items-center my-4">
           <button
             type="submit"
-            className="px-4 py-2 mr-4 rounded active:bg-white active:text-blue-700 bg-blue-700 text-white"
+            className="px-4 py-2 mr-4 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
           >
             INSERT
           </button>
           <button
             className={
-              "px-4 py-2 mr-4 rounded active:bg-white active:text-blue-700 text-white " +
+              "px-4 py-2 mr-4 rounded text-white " +
               (auth.loading
                 ? "bg-yellow-300 text-gray-900"
                 : auth.safeMode
