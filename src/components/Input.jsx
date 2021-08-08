@@ -1,16 +1,15 @@
-import { useState, useReducer, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function Input() {
-  // const [data, setData] = useState([]);
-
   const [name, setName] = useState("");
   const [animeName, setAnimeName] = useState("");
-  const [data, setData] = useState("");
-  const { dispatch } = useContext(AnimeContext);
+  const firstUpdate = useRef(true);
+  const { dispatch, auth, authenticator } = useContext(AnimeContext);
 
+  //FETCHING DATA FROM API AND SENDING TO REDUCER TO ADD IT TO ANIMES STATE OF REDUCER
   function DataFetcher(name) {
-    const query = `query($name: String, $status: MediaStatus) {
+    const query = `query($name: String, $status: MediaStatus) {         
             Media(search: $name, type: ANIME, status: $status) {
               id,
               title {
@@ -26,7 +25,7 @@ function Input() {
               averageScore,
               type,
               genres,
-             
+              isAdult,
               episodes,
               nextAiringEpisode {
                 id,
@@ -56,10 +55,9 @@ function Input() {
       .then((r) => r.json())
       .then((data) => {
         console.log("data returned:", data);
-        if (data.errors) {
+        if (data.errors || (auth.safeMode ? data.data.Media.isAdult : 0)) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
-          setData(data);
           dispatch({
             type: "ADD_ANIME",
             anime: {
@@ -77,86 +75,65 @@ function Input() {
         }
       });
   }
-  function DataLiveFetcher() {
-    const query = `query($name: String, $status: MediaStatus) {
-            Media((filter: {status: "RELEASED"})) {
-              id,
-              title {
-                english,
-                romaji,
-              },
-              status,
-              startDate {
-                year,
-                month,
-                day
-              },
-              averageScore,
-              type,
-              genres,
-             
-              episodes,
-              nextAiringEpisode {
-                id,
-                airingAt,
-                timeUntilAiring
-              },
-              bannerImage,
-              coverImage {
-                large,
-                extraLarge
-              }
-            }
-          
-          }`;
 
-    fetch("https://graphql.anilist.co", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query,
-        variables: { name: name },
-      }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log("data returned live:", data);
-        if (data.errors) {
-          alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
-        }
-      });
-  }
-
+  //Taking input from form and adding the requested name to animeName state and clearing the form input
   function handleSubmit(e) {
     e.preventDefault();
     setAnimeName(name);
-    // DataLiveFetcher();
-    // console.log(animeName);
-    // DataFetcher(animeName);
-    // dispatch({ type: "ADD_ANIME", anime: { name } });
     setName("");
-    // setGenre("");
   }
+
+  //LOADING ANIMES FROM LOCAL STORAGE AND IF WE GOT NEW ANIME REQ FROM INPUT i.e. animeName state changed above SEND THAT ANIME REQ TO API
   useEffect(() => {
     dispatch({ type: "LOAD_ANIMES" });
     if (animeName) {
+      //If to prevent sending an empty req to API as use effect runs when DOM loads too and animeName is "" i.e false at beginning
       DataFetcher(animeName);
     }
-  }, [animeName]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animeName]); // <---- NOTICE THE DEPENDENCY ARRAY OF animeName which runs it everytime user enters a new anime req.
+
+  useEffect(() => {
+    if (firstUpdate.current) {
+      console.log('Pssst... Password is "stillwinter"');
+      //If to prevent the useeffect to run the main code on firstupdate i.e when DOM LOADS
+      firstUpdate.current = false;
+      return;
+    } else {
+      //Main code to add loading and change the safe mode button
+      authenticator({ type: "TOGGLE_LOADING" });
+      if (auth.password) {
+        Loading().then(() => {
+          authenticator({ type: "TOGGLE_SAFE_MODE" });
+          authenticator({ type: "TOGGLE_LOADING" });
+        });
+      } else {
+        Loading().then(() => {
+          alert("WRONG PASSWORD!");
+          authenticator({ type: "TOGGLE_LOADING" });
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.passwordToggle]);
+
+  //Loading promise for loading animation of 1s
+  const Loading = () => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  };
 
   return (
     <>
       <form
         id="input_form"
-        className="flex justify-center m-8"
+        className="flex items-center justify-center flex-col mx-8 mt-8 xl:flex-row lg:flex-row md:flex-col sm:flex-col"
         onSubmit={handleSubmit}
       >
         <input
           id="name"
-          className="p-2 mr-4 w-full bg-gray-600 text-gray-100 focus:ring rounded ring-blue-700 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-full"
+          className="p-2 mr-4 w-full bg-gray-600 text-gray-100 focus:ring rounded ring-blue-700 xl:w-1/2 lg:w-1/2 md:w-3/4 sm:w-full"
           type="text"
           name="hidden"
           value={name}
@@ -165,13 +142,46 @@ function Input() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-
-        <button
-          type="submit"
-          className="px-4 py-2 mr-4 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
-        >
-          INSERT
-        </button>
+        <div className="buttons flex justify-center items-center my-4">
+          <button
+            type="submit"
+            className="px-4 py-2 mr-4 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
+          >
+            INSERT
+          </button>
+          <button
+            className={
+              "px-4 py-2 mr-4 rounded hover:bg-white hover:text-blue-700 text-white " +
+              (auth.loading
+                ? "bg-yellow-300 text-gray-900"
+                : auth.safeMode
+                ? "bg-green-700 "
+                : "bg-red-700 ")
+            }
+            type="button"
+            onClick={() => {
+              //This IF prevents asking for password when coming back from SAFE MODE OFF to ON
+              if (auth.password) {
+                authenticator({ type: "TOGGLE_LOADING" });
+                authenticator({ type: "CHECK_PASSWORD", payload: "xD" }); //Unique Strategy To prevent loading of useEffect and set password to false again. Check Dependency of UseEffect line 118 authReducer for more info.
+                Loading().then(() => {
+                  authenticator({ type: "TOGGLE_SAFE_MODE" });
+                  authenticator({ type: "TOGGLE_LOADING" });
+                });
+              } else {
+                //If Safe Mode Is ON Ask Password To turn it off
+                let password = prompt("ENTER PASSWORD");
+                authenticator({ type: "CHECK_PASSWORD", payload: password });
+              }
+            }}
+          >
+            {auth.loading //Button text rendering based on states
+              ? "LOADING"
+              : auth.safeMode
+              ? "SAFE MODE:ON"
+              : "SAFE MODE:OFF"}
+          </button>
+        </div>
       </form>
     </>
   );

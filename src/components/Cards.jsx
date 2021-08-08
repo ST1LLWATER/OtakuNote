@@ -5,7 +5,7 @@ import { useContext } from "react";
 function Cards() {
   const { animes } = useContext(AnimeContext);
   return animes.length ? (
-    <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 justify-items-center">
+    <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-10 justify-items-center ">
       {animes.map((anime) => {
         return (
           <Card

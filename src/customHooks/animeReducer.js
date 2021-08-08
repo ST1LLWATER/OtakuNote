@@ -11,7 +11,6 @@ function animeReducer(state, action) {
 
     case "ADD_ANIME":
       let stateCopy = [
-        ...state,
         {
           name: action.anime.name,
           genre: action.anime.genre,
@@ -22,6 +21,7 @@ function animeReducer(state, action) {
           date: action.anime.date,
           id: Date.now(),
         },
+        ...state,
       ];
       localStorage.setItem("list", JSON.stringify(stateCopy));
       return stateCopy;
