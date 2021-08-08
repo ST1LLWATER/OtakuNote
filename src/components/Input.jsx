@@ -1,4 +1,3 @@
-import { computeHeadingLevel } from "@testing-library/react";
 import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
 
@@ -102,7 +101,6 @@ function Input() {
       return;
     } else {
       //Main code to add loading and change the safe mode button
-      authenticator({ type: "TOGGLE_LOADING" });
       if (auth.password) {
         Loading().then(() => {
           authenticator({ type: "TOGGLE_SAFE_MODE" });
@@ -122,6 +120,12 @@ function Input() {
   const Loading = () => {
     return new Promise((resolve) => {
       setTimeout(resolve, 1000);
+    });
+  };
+
+  const LoadingAuth = () => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 3000);
     });
   };
 
@@ -171,14 +175,22 @@ function Input() {
                 });
               } else {
                 //If Safe Mode Is ON Ask Password To turn it off
-                let password = prompt("ENTER PASSWORD");
-                if (password === null) {
-                  return;
-                } else if (password === "") {
-                  return;
-                } else {
-                  authenticator({ type: "CHECK_PASSWORD", payload: password });
-                }
+                authenticator({ type: "TOGGLE_LOADING" });
+                LoadingAuth().then(() => {
+                  let password = prompt("ENTER PASSWORD");
+                  if (password === null) {
+                    authenticator({ type: "TOGGLE_LOADING" });
+                    return;
+                  } else if (password === "") {
+                    authenticator({ type: "TOGGLE_LOADING" });
+                    return;
+                  } else {
+                    authenticator({
+                      type: "CHECK_PASSWORD",
+                      payload: password,
+                    });
+                  }
+                });
               }
             }}
           >
