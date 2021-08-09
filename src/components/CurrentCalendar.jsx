@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import Card from "./Card";
+import { useContext, useEffect } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
 import Cards from "./Cards";
 
@@ -16,7 +15,7 @@ function CurrentCalendar() {
             lastPage
             hasNextPage
           }
-          media(type: ANIME, status: RELEASING, season: SUMMER, seasonYear: 2021 sort:SCORE_DESC) {
+          media(type: ANIME, status: RELEASING, season: SUMMER, seasonYear: 2021 sort:POPULARITY_DESC) {
             id
             title {
               english
@@ -32,6 +31,7 @@ function CurrentCalendar() {
               day
             }
             status
+            description
             episodes
             genres
             isAdult
@@ -69,12 +69,13 @@ function CurrentCalendar() {
               name: item.title.english ? item.title.english : item.title.romaji,
               url: item.coverImage.extraLarge,
               genre: item.genres,
-              // aid: item.id,
+              description: item.description,
               rating: item.averageScore,
               episodes: item.episodes,
               date: item.startDate,
             },
           });
+          return null;
         });
         //   console.log(apiData);
         //   data.data.Page.media.map((item, index) => {
@@ -95,8 +96,13 @@ function CurrentCalendar() {
   }
   useEffect(() => {
     CurrentDataFetcher();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return currentAnimes.length > 10 ? <Cards type="Current" /> : "Loading...";
+  return currentAnimes.length > 10 ? (
+    <Cards type="Current" />
+  ) : (
+    <div className="text-4xl text-white mt-32 text-center"> Loading.... </div>
+  );
 }
 
 export default CurrentCalendar;

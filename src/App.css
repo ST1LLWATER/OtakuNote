@@ -4,8 +4,10 @@ body {
   overflow-x: hidden;
   font-family: "Rubik", sans-serif !important;
 }
-.cover {
+
+#root {
   width: 100vw;
+  min-height: 100vh;
 }
 
 .cards {

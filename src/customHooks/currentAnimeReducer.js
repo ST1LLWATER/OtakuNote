@@ -15,6 +15,12 @@ function animeReducer(state, action) {
         },
       ];
       return stateCopy;
+
+    case "CLEAR":
+      return [];
+
+    default:
+      return state;
   }
 }
 

@@ -7,7 +7,7 @@ function Cards(props) {
   let animesMap;
   const { animes } = useContext(AnimeContext);
   let { currentAnimes } = useContext(AnimeContext);
-  props.type == "Current" ? (animesMap = currentAnimes) : (animesMap = animes);
+  props.type === "Current" ? (animesMap = currentAnimes) : (animesMap = animes);
 
   return animesMap.length ? (
     props.type === "Current" ? (
@@ -22,6 +22,7 @@ function Cards(props) {
               rating={anime.rating}
               episodes={anime.episodes}
               url={anime.url}
+              description={anime.description}
               date={anime.date}
             />
           );
@@ -32,11 +33,13 @@ function Cards(props) {
         {animesMap.map((anime) => {
           return (
             <Card
+              // key={index}
               name={anime.name}
-              anime_id={anime.aid}
+              key={anime.aid}
               genre={anime.genre}
               rating={anime.rating}
               episodes={anime.episodes}
+              description={anime.description}
               url={anime.url}
               date={anime.date}
               id={anime.id}
@@ -46,9 +49,7 @@ function Cards(props) {
       </div>
     )
   ) : (
-    <h1 className="empty text-white text-center text-xl font-bold">
-      NO MORE ANIME....
-    </h1>
+    <h1 className="text-4xl text-white mt-32 text-center">NO MORE ANIME....</h1>
   );
 }
 

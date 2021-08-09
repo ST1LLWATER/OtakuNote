@@ -1,22 +1,23 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
-import CurrentCalendar from "./CurrentCalendar";
 
 function Input() {
   const [name, setName] = useState("");
   const [animeName, setAnimeName] = useState("");
   const firstUpdate = useRef(true);
-  const { dispatch, auth, authenticator } = useContext(AnimeContext);
+  const { dispatch, auth, authenticator, currentAnimeDispatch } =
+    useContext(AnimeContext);
   //FETCHING DATA FROM API AND SENDING TO REDUCER TO ADD IT TO ANIMES STATE OF REDUCER
   function DataFetcher(name) {
     const query = `query($name: String, $status: MediaStatus) {         
-      Media(search: $name, type: ANIME, status: $status) {
+      Media(search: $name, type: ANIME, status: $status,genre_not_in:"MUSIC") {
         id,
         title {
           english,
           romaji,
         },
         status,
+        description,
         startDate {
           year,
           month,
@@ -69,6 +70,7 @@ function Input() {
               rating: data.data.Media.averageScore,
               episodes: data.data.Media.episodes,
               date: data.data.Media.startDate,
+              description: data.data.Media.description,
               id: Date.now(),
             },
           });
@@ -81,6 +83,12 @@ function Input() {
     setAnimeName(name);
     setName("");
   }
+
+  useEffect(() => {
+    console.log("CURRENT CALENDAR CLEARED");
+    currentAnimeDispatch({ type: "CLEAR" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //LOADING ANIMES FROM LOCAL STORAGE AND IF WE GOT NEW ANIME REQ FROM INPUT i.e. animeName state changed above SEND THAT ANIME REQ TO API
   useEffect(() => {
@@ -127,17 +135,17 @@ function Input() {
       setTimeout(resolve, 3000);
     });
   };
-
+  // flex items-center justify-center flex-col mx-8 mt-8 xl:flex-row lg:flex-row md:flex-col sm:flex-col
   return (
     <>
       <form
         id="input_form"
-        className="flex items-center justify-center flex-col mx-8 mt-8 xl:flex-row lg:flex-row md:flex-col sm:flex-col"
+        className="form-control  mx-8 mt-8 flex "
         onSubmit={handleSubmit}
       >
         <input
           id="name"
-          className="p-2 mr-4 w-full bg-gray-600 text-gray-100 focus:ring rounded ring-blue-700 xl:w-1/2 lg:w-1/2 md:w-3/4 sm:w-full"
+          className="input input-info input-bordered"
           type="text"
           name="hidden"
           value={name}

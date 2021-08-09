@@ -1,10 +1,18 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function CurrentCalendarCard(props) {
   const { dispatch, animes } = useContext(AnimeContext);
-  // console.log(animes);
+  const { auth, authenticator } = useContext(AnimeContext);
+  const [addWatchlist, setAddWatchlist] = useState(false);
+
+  const Loading = () => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  };
+
   const slider = useRef(null);
   let months = [
     "January",
@@ -33,9 +41,9 @@ function CurrentCalendarCard(props) {
     mouseDown = false;
   };
 
-  useEffect(() => {
-    dispatch({ type: "LOAD_ANIMES" });
-  }, []);
+  // useEffect(() => {
+  //   dispatch({ type: "LOAD_ANIMES" });
+  // }, []);
 
   function mouseMoveEvent(e) {
     e.preventDefault();
@@ -49,6 +57,7 @@ function CurrentCalendarCard(props) {
   }
 
   function handleAdd() {
+    console.log(animes);
     dispatch({
       type: "ADD_ANIME",
       anime: {
@@ -69,7 +78,7 @@ function CurrentCalendarCard(props) {
       <div
         className="card_outer flex items-end z-10"
         style={{
-          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
+          background: `linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),
     url(${props.url}) no-repeat center center/cover`,
         }}
       >
@@ -125,10 +134,30 @@ function CurrentCalendarCard(props) {
 
           <button
             id="add"
-            className="flex justify-center items-center p-2 w-full mx-auto bg-red-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
-            onClick={handleAdd}
+            className={
+              "px-4 py-2 mr-4 rounded text-white " +
+              (auth.loading
+                ? "bg-yellow-300 text-gray-900"
+                : auth.safeMode
+                ? "bg-green-700 "
+                : "bg-red-700 ")
+            }
+            className={
+              (addWatchlist
+                ? "bg-yellow-300 text-gray-900 "
+                : "bg-blue-600 text-white ") +
+              "flex justify-center  items-center p-2 w-full mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
+            }
+            onClick={() => {
+              handleAdd();
+              setAddWatchlist(true);
+              Loading().then(() => {
+                setAddWatchlist(false);
+              });
+            }}
           >
-            <i className="far fa-trash-alt mr-2"></i>ADD TO WATCHLIST
+            <i class="far fa-plus-square mr-2"></i>
+            {addWatchlist ? "LOADING" : "WATCHLIST"}
           </button>
         </div>
       </div>

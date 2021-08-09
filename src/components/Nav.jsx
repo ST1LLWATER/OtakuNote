@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Nav() {
   return (
-    <nav id="nav">
+    <nav id="nav" className="">
       <div className="nav-content">
         <ul className="nav-items">
           <li>
@@ -11,7 +11,7 @@ function Nav() {
             </Link>
           </li>
           <li>
-            <Link to="/current" className="nav-item">
+            <Link to="/current" className="nav-item whitespace-nowrap">
               CURRENT CALENDAR
             </Link>
           </li>

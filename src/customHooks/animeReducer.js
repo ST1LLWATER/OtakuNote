@@ -20,6 +20,7 @@ function animeReducer(state, action) {
           rating: action.anime.rating,
           episodes: action.anime.episodes,
           date: action.anime.date,
+          description: action.anime.description,
           id: action.anime.id,
         },
         ...state,

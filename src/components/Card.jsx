@@ -1,10 +1,11 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function Card(props) {
   const { dispatch } = useContext(AnimeContext);
   const slider = useRef(null);
+  // const [description, setDescription] = useState(props.description);
   let months = [
     "January",
     "February",
@@ -46,9 +47,22 @@ function Card(props) {
     const scroll = x - startX;
     slider.current.scrollLeft = scrollLeft - scroll;
   }
-
+  // let description = props.description;
+  // let newDescription = description.replace(/\<[^>]+?>/, "");
+  console.log(props);
   return (
     <>
+      <div id="my-modal" class="modal">
+        <div class="modal-box">
+          <h2 className="pr-2 font-bold text-xl">{props.name}</h2>
+          <p>{props.description}</p>
+          <div class="modal-action">
+            <a href="#" class="btn">
+              Close
+            </a>
+          </div>
+        </div>
+      </div>
       <div
         className="card_outer flex items-end z-10"
         style={{
@@ -77,7 +91,6 @@ function Card(props) {
             <div className="card_rating">
               {props.rating ? (
                 <>
-                  {" "}
                   {props.rating / 10} <i className="fas fa-star"></i>
                 </>
               ) : (
@@ -105,14 +118,21 @@ function Card(props) {
               );
             })}
           </div>
-
-          <button
-            id="delete"
-            className="flex justify-center items-center p-2 w-full mx-auto bg-red-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
-            onClick={handleDelete}
-          >
-            <i className="far fa-trash-alt mr-2"></i>DELETE
-          </button>
+          <div className="flex">
+            <button
+              id="delete"
+              className="flex justify-center items-center p-2 w-1/2 mx-2 bg-red-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
+              onClick={handleDelete}
+            >
+              <i className="far fa-trash-alt mr-2"></i>DELETE
+            </button>
+            <a
+              href="#my-modal"
+              class="flex justify-center items-center p-2 w-1/2 mx-2 bg-blue-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
+            >
+              MORE INFO
+            </a>
+          </div>
         </div>
       </div>
     </>
