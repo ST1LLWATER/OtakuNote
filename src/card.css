@@ -13,7 +13,6 @@ background: linear-gradient(to right, #414345, #232526); */
 .card_outer {
   position: relative;
   user-select: none;
-  margin: 20px 0;
   overflow: hidden;
   /* overflow-x: auto; */
   width: 300px;

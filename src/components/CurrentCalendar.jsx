@@ -3,7 +3,8 @@ import { AnimeContext } from "../contexts/AnimeContext";
 import Cards from "./Cards";
 
 function CurrentCalendar() {
-  const { currentAnimes, currentAnimeDispatch } = useContext(AnimeContext);
+  const { currentAnimes, currentAnimeDispatch, auth } =
+    useContext(AnimeContext);
 
   let date = new Date();
 
@@ -100,19 +101,25 @@ function CurrentCalendar() {
         console.log("data returned:", data);
         let apiData = data.data.Page.media;
         apiData.map((item) => {
-          currentAnimeDispatch({
-            type: "ADD_ANIME",
-            anime: {
-              name: item.title.english ? item.title.english : item.title.romaji,
-              url: item.coverImage.extraLarge,
-              genre: item.genres,
-              description: item.description,
-              rating: item.averageScore,
-              episodes: item.episodes,
-              date: item.startDate,
-              banner: item.bannerImage,
-            },
-          });
+          if (auth.safeMode && item.isAdult) {
+            return;
+          } else {
+            currentAnimeDispatch({
+              type: "ADD_ANIME",
+              anime: {
+                name: item.title.english
+                  ? item.title.english
+                  : item.title.romaji,
+                url: item.coverImage.extraLarge,
+                genre: item.genres,
+                description: item.description,
+                rating: item.averageScore,
+                episodes: item.episodes,
+                date: item.startDate,
+                banner: item.bannerImage,
+              },
+            });
+          }
           return null;
         });
         //   console.log(apiData);
@@ -136,7 +143,7 @@ function CurrentCalendar() {
     CurrentDataFetcher();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return currentAnimes.length > 10 ? (
+  return currentAnimes.length > 1 ? (
     <Cards type="Current" />
   ) : (
     <div className="text-4xl text-white mt-32 text-center"> Loading.... </div>

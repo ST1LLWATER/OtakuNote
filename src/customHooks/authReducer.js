@@ -53,7 +53,6 @@ function authReducer(state, action) {
 
     case "SET_SELECTED_STATE":
       let newSelectedState = action.payload;
-      console.log(newSelectedState);
       return { ...state, selectedState: newSelectedState };
 
     default:

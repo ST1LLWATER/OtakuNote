@@ -44,6 +44,7 @@ body {
   z-index: 99999;
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  perspective: 1000px;
 }
 
 /* Modal Content */
@@ -52,9 +53,54 @@ body {
   border: 1px solid #888;
   scrollbar-color: #302c2c;
   scrollbar-width: 10px;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19),
-    0 6px 6px rgba(255, 255, 255, 0.23);
   scrollbar-track-color: black;
+  transform-style: preserve-3d;
+  animation: flipIn 0.5s ease;
+  -webkit-animation: flipIn 0.5s ease;
+}
+
+.flipOut {
+  animation: flipOut 0.5s ease;
+  -webkit-animation: flipOut 0.5s ease;
+}
+
+@keyframes flipIn {
+  from {
+    transform: rotateY(-20deg);
+    opacity: 0;
+    -webkit-transform: rotateY(-20deg);
+    -moz-transform: rotateY(-20deg);
+    -ms-transform: rotateY(-20deg);
+    -o-transform: rotateY(-20deg);
+  }
+  to {
+    transform: rotateX(0);
+    opacity: 1;
+    -webkit-transform: rotateX(0);
+    -moz-transform: rotateX(0);
+    -ms-transform: rotateX(0);
+    -o-transform: rotateX(0);
+  }
+}
+
+@keyframes flipOut {
+  from {
+    transform: rotateY(0deg);
+    opacity: 1;
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(-20deg);
+    opacity: 0;
+    -webkit-transform: rotateY(-20deg);
+    -moz-transform: rotateY(-20deg);
+    -ms-transform: rotateY(-20deg);
+    -o-transform: rotateY(-20deg);
+  }
 }
 
 .modal-content::-webkit-scrollbar {

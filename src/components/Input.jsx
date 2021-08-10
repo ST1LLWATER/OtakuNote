@@ -87,7 +87,6 @@ function Input() {
   }
 
   useEffect(() => {
-    console.log("CURRENT CALENDAR CLEARED");
     currentAnimeDispatch({ type: "CLEAR" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -142,7 +141,7 @@ function Input() {
     <>
       <form
         id="input_form"
-        className="mx-8 mt-8 flex flex-col justify-center items-center space-x-4 xl:flex-row lg:flex-row md:flex-row sm:flex-col "
+        className="mx-8 mt-4 flex flex-col justify-center items-center space-x-4 xl:flex-row lg:flex-row md:flex-row sm:flex-col "
         onSubmit={handleSubmit}
       >
         <input

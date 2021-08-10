@@ -15,14 +15,13 @@ function Cards(props) {
   }
 
   function hideModal() {
-    console.log("HIDER");
     document.body.style.overflow = "auto";
     authenticator({ type: "NULLIFER" });
   }
 
   return animesMap.length ? (
     props.type === "Current" ? (
-      <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-10 justify-items-center ">
+      <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-6 justify-items-center ">
         {animesMap.map((anime) => {
           return (
             <CurrentCalendarCard

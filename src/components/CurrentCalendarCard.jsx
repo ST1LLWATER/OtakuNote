@@ -5,6 +5,7 @@ import { AnimeContext } from "../contexts/AnimeContext";
 function CurrentCalendarCard(props) {
   const { dispatch } = useContext(AnimeContext);
   const [addWatchlist, setAddWatchlist] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const Loading = () => {
     return new Promise((resolve) => {
@@ -56,7 +57,6 @@ function CurrentCalendarCard(props) {
   }
 
   function handleAdd() {
-    console.log(props);
     dispatch({
       type: "ADD_ANIME",
       anime: {
@@ -71,6 +71,13 @@ function CurrentCalendarCard(props) {
         banner: props.banner,
         id: Date.now(),
       },
+    });
+  }
+
+  function successFunction() {
+    setSuccess(true);
+    Loading().then(() => {
+      setSuccess(false);
     });
   }
 
@@ -138,6 +145,8 @@ function CurrentCalendarCard(props) {
             className={
               (addWatchlist
                 ? "bg-yellow-300 text-gray-900 "
+                : success
+                ? "bg-green-600 text-white "
                 : "bg-blue-600 text-white ") +
               "flex justify-center  items-center p-2 w-full mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
             }
@@ -146,11 +155,12 @@ function CurrentCalendarCard(props) {
               setAddWatchlist(true);
               Loading().then(() => {
                 setAddWatchlist(false);
+                successFunction();
               });
             }}
           >
-            <i class="far fa-plus-square mr-2"></i>
-            {addWatchlist ? "LOADING" : "WATCHLIST"}
+            <i className="far fa-plus-square mr-2"></i>
+            {addWatchlist ? "LOADING" : success ? "SUCCESS" : "WATCHLIST"}
           </button>
         </div>
       </div>

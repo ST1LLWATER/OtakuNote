@@ -37,7 +37,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": ".",
+  "homepage": "/",
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
