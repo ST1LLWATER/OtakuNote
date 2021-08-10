@@ -1,13 +1,24 @@
 import Card from "./Card";
 import { AnimeContext } from "../contexts/AnimeContext";
+import Modal from "./Modal";
 import { useContext } from "react";
 import CurrentCalendarCard from "./CurrentCalendarCard";
 
 function Cards(props) {
   let animesMap;
-  const { animes } = useContext(AnimeContext);
+  const { animes, authenticator, auth } = useContext(AnimeContext);
   let { currentAnimes } = useContext(AnimeContext);
   props.type === "Current" ? (animesMap = currentAnimes) : (animesMap = animes);
+  function showModal(id) {
+    let newSelectedState = animes.find((x) => x.id === id);
+    authenticator({ type: "SET_SELECTED_STATE", payload: newSelectedState });
+  }
+
+  function hideModal() {
+    console.log("HIDER");
+    document.body.style.overflow = "auto";
+    authenticator({ type: "NULLIFER" });
+  }
 
   return animesMap.length ? (
     props.type === "Current" ? (
@@ -24,6 +35,7 @@ function Cards(props) {
               url={anime.url}
               description={anime.description}
               date={anime.date}
+              banner={anime.banner}
             />
           );
         })}
@@ -43,9 +55,13 @@ function Cards(props) {
               url={anime.url}
               date={anime.date}
               id={anime.id}
+              showModalFunction={showModal}
             />
           );
         })}
+        {auth.selectedState && (
+          <Modal info={auth.selectedState} onClose={hideModal} />
+        )}
       </div>
     )
   ) : (

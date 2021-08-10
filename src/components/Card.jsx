@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
@@ -21,10 +21,6 @@ function Card(props) {
     "December",
   ];
 
-  function handleDelete(e) {
-    dispatch({ type: "REMOVE_ANIME", id: props.id });
-  }
-
   let mouseDown = false;
   let startX, scrollLeft;
 
@@ -33,9 +29,13 @@ function Card(props) {
     startX = e.pageX - slider.current.offsetLeft;
     scrollLeft = slider.current.scrollLeft;
   };
-  const stopDragging = (event) => {
+  const stopDragging = () => {
     mouseDown = false;
   };
+
+  function handleDelete() {
+    dispatch({ type: "REMOVE_ANIME", id: props.id });
+  }
 
   function mouseMoveEvent(e) {
     e.preventDefault();
@@ -49,20 +49,10 @@ function Card(props) {
   }
   // let description = props.description;
   // let newDescription = description.replace(/\<[^>]+?>/, "");
-  console.log(props);
+  // console.log(props);
+
   return (
     <>
-      <div id="my-modal" class="modal">
-        <div class="modal-box">
-          <h2 className="pr-2 font-bold text-xl">{props.name}</h2>
-          <p>{props.description}</p>
-          <div class="modal-action">
-            <a href="#" class="btn">
-              Close
-            </a>
-          </div>
-        </div>
-      </div>
       <div
         className="card_outer flex items-end z-10"
         style={{
@@ -126,12 +116,14 @@ function Card(props) {
             >
               <i className="far fa-trash-alt mr-2"></i>DELETE
             </button>
-            <a
-              href="#my-modal"
+            <button
+              onClick={() => {
+                props.showModalFunction(props.id);
+              }}
               class="flex justify-center items-center p-2 w-1/2 mx-2 bg-blue-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
             >
               MORE INFO
-            </a>
+            </button>
           </div>
         </div>
       </div>

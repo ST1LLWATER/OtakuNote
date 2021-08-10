@@ -25,6 +25,7 @@ function Input() {
         },
         averageScore,
         type,
+        bannerImage,
         genres,
         isAdult,
         episodes,
@@ -71,6 +72,7 @@ function Input() {
               episodes: data.data.Media.episodes,
               date: data.data.Media.startDate,
               description: data.data.Media.description,
+              banner: data.data.Media.bannerImage,
               id: Date.now(),
             },
           });
@@ -140,12 +142,12 @@ function Input() {
     <>
       <form
         id="input_form"
-        className="form-control  mx-8 mt-8 flex "
+        className="mx-8 mt-8 flex flex-col justify-center items-center space-x-4 xl:flex-row lg:flex-row md:flex-row sm:flex-col "
         onSubmit={handleSubmit}
       >
         <input
           id="name"
-          className="input input-info input-bordered"
+          className="w-full sm:w-full xl:w-3/4 lg:w-3/4 md:w-3/4 mt-4 bg-gray-600 rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
           type="text"
           name="hidden"
           value={name}
@@ -154,16 +156,16 @@ function Input() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        <div className="buttons flex justify-center items-center my-4">
+        <div className="buttons flex justify-center items-center space-x-4 mt-4">
           <button
             type="submit"
-            className="px-4 py-2 mr-4 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
+            className="px-4 py-2 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
           >
             INSERT
           </button>
           <button
             className={
-              "px-4 py-2 mr-4 rounded text-white " +
+              "px-4 py-2 rounded text-white whitespace-nowrap " +
               (auth.loading
                 ? "bg-yellow-300 text-gray-900"
                 : auth.safeMode

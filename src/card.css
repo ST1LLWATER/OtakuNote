@@ -49,14 +49,14 @@ background: linear-gradient(to right, #414345, #232526); */
   overflow: hidden; */
   display: block;
   text-overflow: ellipsis;
-  font-family: "Kanit", sans-serif;
+  /* font-family: "Kanit", sans-serif; */
   /* color: black; */
   mix-blend-mode: hard-light;
 }
 
 .card_content .genre p {
   letter-spacing: 0.2px;
-  font-family: "Commissioner", sans-serif;
+  /* font-family: "Commissioner", sans-serif; */
   white-space: nowrap;
 }
 

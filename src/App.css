@@ -2,7 +2,8 @@ body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
-  font-family: "Rubik", sans-serif !important;
+  font-family: "Rubik", sans-serif;
+  user-select: none;
 }
 
 #root {
@@ -19,7 +20,7 @@ body {
   max-width: 100%;
 }
 
-nav {
+/* nav {
   display: flex;
   height: 77px;
   position: sticky;
@@ -29,7 +30,7 @@ nav {
   width: 100%;
   transition: all 0.3s ease-in;
   z-index: 100;
-}
+} */
 
 .nav-content {
   display: flex;
@@ -37,6 +38,37 @@ nav {
   justify-content: center;
   color: white;
   margin: auto;
+}
+
+.modal {
+  z-index: 99999;
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  margin: auto;
+  border: 1px solid #888;
+  scrollbar-color: #302c2c;
+  scrollbar-width: 10px;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.19),
+    0 6px 6px rgba(255, 255, 255, 0.23);
+  scrollbar-track-color: black;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #302c2c;
+  border-radius: 100px;
 }
 
 /* .brand a {

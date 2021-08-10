@@ -16,6 +16,7 @@ function AnimeContextProvider(props) {
     loading: false,
     password: false,
     passwordToggle: false,
+    selectedState: null,
   });
   return (
     <AnimeContext.Provider

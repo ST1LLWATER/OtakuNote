@@ -9,8 +9,10 @@ function animeReducer(state, action) {
           url: action.anime.url,
           id: action.anime.aid,
           rating: action.anime.rating,
+          description: action.anime.description,
           episodes: action.anime.episodes,
           date: action.anime.date,
+          banner: action.anime.banner,
           // id: Date.now(),
         },
       ];

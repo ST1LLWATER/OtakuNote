@@ -4,8 +4,45 @@ import Cards from "./Cards";
 
 function CurrentCalendar() {
   const { currentAnimes, currentAnimeDispatch } = useContext(AnimeContext);
-  //   console.log(currentAnimes);
+
+  let date = new Date();
+
+  let seasonObject = {
+    WINTER: ["January", "February", "March"],
+    SPRING: ["April", "May", "June"],
+    SUMMER: ["July", "August", "September"],
+    FALL: ["October", "November", "December"],
+  };
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   function CurrentDataFetcher() {
+    let seasonKey;
+    let month = months[date.getMonth()];
+    let currentYear = date.getFullYear();
+    getSeason(month);
+
+    function getSeason(month) {
+      Object.keys(seasonObject).find((key) => {
+        if (seasonObject[key].includes(`${month}`)) {
+          seasonKey = key;
+        }
+      });
+    }
+
     const query = `query ($page: Int = 1) {
         Page(page: $page, perPage: 50) {
           pageInfo {
@@ -15,7 +52,7 @@ function CurrentCalendar() {
             lastPage
             hasNextPage
           }
-          media(type: ANIME, status: RELEASING, season: SUMMER, seasonYear: 2021 sort:POPULARITY_DESC) {
+          media(type: ANIME, status: RELEASING, season: ${seasonKey}, seasonYear: ${currentYear}, sort:POPULARITY_DESC) {
             id
             title {
               english
@@ -34,6 +71,7 @@ function CurrentCalendar() {
             description
             episodes
             genres
+            bannerImage
             isAdult
             averageScore
             nextAiringEpisode {
@@ -54,7 +92,6 @@ function CurrentCalendar() {
         query,
         variables: {
           page: 1,
-          status: "RELEASING",
         },
       }),
     })
@@ -62,7 +99,7 @@ function CurrentCalendar() {
       .then((data) => {
         console.log("data returned:", data);
         let apiData = data.data.Page.media;
-        apiData.map((item, index) => {
+        apiData.map((item) => {
           currentAnimeDispatch({
             type: "ADD_ANIME",
             anime: {
@@ -73,6 +110,7 @@ function CurrentCalendar() {
               rating: item.averageScore,
               episodes: item.episodes,
               date: item.startDate,
+              banner: item.bannerImage,
             },
           });
           return null;

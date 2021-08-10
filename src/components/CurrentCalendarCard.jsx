@@ -3,8 +3,7 @@ import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function CurrentCalendarCard(props) {
-  const { dispatch, animes } = useContext(AnimeContext);
-  const { auth, authenticator } = useContext(AnimeContext);
+  const { dispatch } = useContext(AnimeContext);
   const [addWatchlist, setAddWatchlist] = useState(false);
 
   const Loading = () => {
@@ -57,7 +56,7 @@ function CurrentCalendarCard(props) {
   }
 
   function handleAdd() {
-    console.log(animes);
+    console.log(props);
     dispatch({
       type: "ADD_ANIME",
       anime: {
@@ -66,8 +65,10 @@ function CurrentCalendarCard(props) {
         url: props.url,
         // aid: props.id,
         rating: props.rating,
+        description: props.description,
         episodes: props.episodes,
         date: props.date,
+        banner: props.banner,
         id: Date.now(),
       },
     });
@@ -134,14 +135,6 @@ function CurrentCalendarCard(props) {
 
           <button
             id="add"
-            className={
-              "px-4 py-2 mr-4 rounded text-white " +
-              (auth.loading
-                ? "bg-yellow-300 text-gray-900"
-                : auth.safeMode
-                ? "bg-green-700 "
-                : "bg-red-700 ")
-            }
             className={
               (addWatchlist
                 ? "bg-yellow-300 text-gray-900 "

@@ -9,6 +9,7 @@ function authReducer(state, action) {
         loading: state.loading,
         password: state.password,
         passwordToggle: state.passwordToggle,
+        selectedState: state.selectedState,
       };
 
     case "TOGGLE_LOADING":
@@ -19,6 +20,13 @@ function authReducer(state, action) {
         loading: newLoading,
         password: state.password,
         passwordToggle: state.passwordToggle,
+        selectedState: state.selectedState,
+      };
+
+    case "NULLIFER":
+      return {
+        ...state,
+        selectedState: null,
       };
 
     case "CHECK_PASSWORD":
@@ -40,7 +48,13 @@ function authReducer(state, action) {
         loading: state.loading,
         password: newPass,
         passwordToggle: newPasswordToggle,
+        selectedState: state.selectedState,
       };
+
+    case "SET_SELECTED_STATE":
+      let newSelectedState = action.payload;
+      console.log(newSelectedState);
+      return { ...state, selectedState: newSelectedState };
 
     default:
       return state;
