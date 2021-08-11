@@ -151,7 +151,7 @@ function Input() {
           name="hidden"
           value={name}
           placeholder="Anime Name"
-          autoComplete="false"
+          autoComplete="off"
           onChange={(e) => setName(e.target.value)}
           required
         />
