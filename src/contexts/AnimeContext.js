@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from "react";
 import animeReducer from "../customHooks/animeReducer";
 import authReducer from "../customHooks/authReducer";
 import currentAnimeReducer from "../customHooks/currentAnimeReducer";
+import searchReducer from "../customHooks/searchReducer";
 
 export const AnimeContext = createContext();
 
@@ -18,6 +19,7 @@ function AnimeContextProvider(props) {
     passwordToggle: false,
     selectedState: null,
   });
+  const [search, searchAnimes] = useReducer(searchReducer, []);
   return (
     <AnimeContext.Provider
       value={{
@@ -27,6 +29,8 @@ function AnimeContextProvider(props) {
         authenticator,
         currentAnimes,
         currentAnimeDispatch,
+        search,
+        searchAnimes,
       }}
     >
       {props.children}

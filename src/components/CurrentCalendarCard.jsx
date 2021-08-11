@@ -6,7 +6,6 @@ function CurrentCalendarCard(props) {
   const { dispatch } = useContext(AnimeContext);
   const [addWatchlist, setAddWatchlist] = useState(false);
   const [success, setSuccess] = useState(false);
-
   const Loading = () => {
     return new Promise((resolve) => {
       setTimeout(resolve, 1000);

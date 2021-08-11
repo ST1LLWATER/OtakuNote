@@ -60,7 +60,7 @@ function Modal(props) {
             }}
           ></div>
           <button
-            className="sticky bottom-0 ml-auto bg-red-500 hover:bg-yellow-300 hover:text-black text-white font-bold py-2 px-4 rounded"
+            className="sticky bottom-0 ml-auto mr-2 mb-5 bg-red-500 hover:bg-yellow-300 hover:text-black text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               setFlipOut(true);
               Loading2().then(() => {

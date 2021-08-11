@@ -10,6 +10,9 @@ function Nav() {
           </span>
         </div>
         <nav className="md:ml-auto flex flex-wrap justify-center items-center text-lg ">
+          <Link to="/search" className="px-4 py-2 hover:text-white">
+            SEARCH
+          </Link>
           <Link to="/" className=" px-4 py-2 hover:text-white">
             WATCHLIST
           </Link>
