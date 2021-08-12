@@ -7,7 +7,7 @@ function animeReducer(state, action) {
           name: action.anime.name,
           genre: action.anime.genre,
           url: action.anime.url,
-          id: action.anime.aid,
+          aid: action.anime.aid,
           rating: action.anime.rating,
           description: action.anime.description,
           episodes: action.anime.episodes,

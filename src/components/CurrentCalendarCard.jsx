@@ -3,9 +3,11 @@ import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function CurrentCalendarCard(props) {
-  const { dispatch } = useContext(AnimeContext);
-  const [addWatchlist, setAddWatchlist] = useState(false);
+  const { dispatch, animes } = useContext(AnimeContext);
+  const [isLoading, setisLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+
   const Loading = () => {
     return new Promise((resolve) => {
       setTimeout(resolve, 1000);
@@ -62,7 +64,7 @@ function CurrentCalendarCard(props) {
         name: props.name,
         genre: props.genre,
         url: props.url,
-        // aid: props.id,
+        aid: props.aid,
         rating: props.rating,
         description: props.description,
         episodes: props.episodes,
@@ -77,6 +79,13 @@ function CurrentCalendarCard(props) {
     setSuccess(true);
     Loading().then(() => {
       setSuccess(false);
+    });
+  }
+
+  function duplicateWatchlist() {
+    setIsDuplicate(true);
+    Loading().then(() => {
+      setIsDuplicate(false);
     });
   }
 
@@ -142,24 +151,51 @@ function CurrentCalendarCard(props) {
           <button
             id="add"
             className={
-              (addWatchlist
+              (isLoading
                 ? "bg-yellow-300 text-gray-900 "
                 : success
                 ? "bg-green-600 text-white "
+                : isDuplicate
+                ? "bg-red-600 text-white "
                 : "bg-blue-600 text-white ") +
               "flex justify-center  items-center p-2 w-full mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
             }
             onClick={() => {
-              handleAdd();
-              setAddWatchlist(true);
+              console.log(props);
+              // console.log(isDuplicate);
+              let duplicate = animes.find((x) => {
+                return x.aid === props.aid;
+              });
+              console.log(duplicate);
+
+              setisLoading(true);
               Loading().then(() => {
-                setAddWatchlist(false);
-                successFunction();
+                // console.log(isDuplicate);
+                if (duplicate) {
+                  // console.log("IF RAN");
+                  duplicateWatchlist();
+                  setisLoading(false);
+                } else {
+                  // console.log("ELSE RAN");
+                  handleAdd();
+                  successFunction();
+                  setisLoading(false);
+                }
               });
             }}
           >
-            <i className="far fa-plus-square mr-2"></i>
-            {addWatchlist ? "LOADING" : success ? "SUCCESS" : "WATCHLIST"}
+            {isDuplicate ? (
+              <i class="fas fa-times-circle mr-2"></i>
+            ) : (
+              <i className="far fa-plus-square mr-2"></i>
+            )}
+            {isLoading
+              ? "LOADING"
+              : success
+              ? "SUCCESS"
+              : isDuplicate
+              ? "ON WATCHLIST"
+              : "WATCHLIST"}
           </button>
         </div>
       </div>

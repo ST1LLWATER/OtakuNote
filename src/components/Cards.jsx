@@ -22,12 +22,12 @@ function Cards(props) {
   return animesMap.length ? (
     props.type === "Current" ? (
       <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3 mt-6 justify-items-center ">
-        {animesMap.map((anime) => {
+        {animesMap.map((anime, index) => {
           return (
             <CurrentCalendarCard
               name={anime.name}
-              key={anime.id}
-              // anime_id={anime.aid}
+              key={index}
+              aid={anime.aid}
               genre={anime.genre}
               rating={anime.rating}
               episodes={anime.episodes}
@@ -41,12 +41,12 @@ function Cards(props) {
       </div>
     ) : (
       <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-10 justify-items-center ">
-        {animesMap.map((anime) => {
+        {animesMap.map((anime, index) => {
           return (
             <Card
               // key={index}
               name={anime.name}
-              key={anime.aid}
+              key={index}
               genre={anime.genre}
               rating={anime.rating}
               episodes={anime.episodes}

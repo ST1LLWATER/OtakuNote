@@ -32,14 +32,6 @@ body {
   z-index: 100;
 } */
 
-.nav-content {
-  display: flex;
-  width: 95%;
-  justify-content: center;
-  color: white;
-  margin: auto;
-}
-
 .modal {
   z-index: 99999;
   background-color: rgb(0, 0, 0); /* Fallback color */

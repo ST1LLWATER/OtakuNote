@@ -87,6 +87,7 @@ function Search() {
                   episodes: item.episodes,
                   date: item.startDate,
                   banner: item.bannerImage,
+                  aid: item.id,
                 },
               });
             }
@@ -104,6 +105,7 @@ function Search() {
 
   useEffect(() => {
     currentAnimeDispatch({ type: "CLEAR" });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -120,7 +122,7 @@ function Search() {
 
   useEffect(() => {
     if (firstUpdate.current) {
-      console.log('Pssst... Password is "stillwinter"');
+      console.log("Remember The Stillwinter");
       //If to prevent the useeffect to run the main code on firstupdate i.e when DOM LOADS
       firstUpdate.current = false;
       return;
@@ -233,7 +235,7 @@ function Search() {
                 <CurrentCalendarCard
                   name={anime.name}
                   key={anime.id}
-                  // anime_id={anime.aid}
+                  aid={anime.aid}
                   genre={anime.genre}
                   rating={anime.rating}
                   episodes={anime.episodes}

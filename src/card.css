@@ -24,6 +24,11 @@ background: linear-gradient(to right, #414345, #232526); */
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+
+.card_outer:hover {
+  box-shadow: rgb(255 255 255 / 48%) 2px 6px 21px;
+}
+
 .card_content_cover {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
   position: absolute;
