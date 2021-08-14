@@ -6,7 +6,6 @@ function CurrentCalendarRenderer() {
   const { searchAnimes, animes } = useContext(AnimeContext);
   useEffect(() => {
     searchAnimes({ type: "CLEAR" });
-    console.log(animes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <CurrentCalendar />;

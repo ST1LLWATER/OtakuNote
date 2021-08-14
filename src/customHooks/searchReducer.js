@@ -2,6 +2,7 @@ function searchReducer(state, action) {
   switch (action.type) {
     case "SEARCH_ANIME":
       let stateCopy = [
+        ...state,
         {
           name: action.anime.name,
           genre: action.anime.genre,
@@ -14,7 +15,6 @@ function searchReducer(state, action) {
           banner: action.anime.banner,
           id: action.anime.id,
         },
-        ...state,
       ];
       return stateCopy;
 

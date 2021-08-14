@@ -19,9 +19,6 @@ function Nav() {
           <Link to="/current" className="px-4 py-2 hover:text-white">
             ONGOING ANIMES
           </Link>
-          <Link to="/" className="px-4 py-2 hover:text-white">
-            KHOPCHA
-          </Link>
         </nav>
       </div>
     </header>

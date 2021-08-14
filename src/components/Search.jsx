@@ -21,7 +21,7 @@ function Search() {
             lastPage
             hasNextPage
           }
-          media(type: ANIME, search:"${searchName}", sort:POPULARITY) {
+          media(type: ANIME, search:"${searchName}", sort:POPULARITY_DESC) {
             id
             title {
               english
@@ -65,15 +65,16 @@ function Search() {
     })
       .then((r) => r.json())
       .then((data) => {
+        let pageInfo = data.data.Page.pageInfo;
         if (data.errors) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
+          console.log(data);
           let apiData = data.data.Page.media;
           apiData.map((item) => {
             if (auth.safeMode && item.isAdult) {
               return;
             } else {
-              console.log(data);
               searchAnimes({
                 type: "SEARCH_ANIME",
                 anime: {

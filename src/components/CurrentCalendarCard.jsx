@@ -161,12 +161,10 @@ function CurrentCalendarCard(props) {
               "flex justify-center  items-center p-2 w-full mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
             }
             onClick={() => {
-              console.log(props);
               // console.log(isDuplicate);
               let duplicate = animes.find((x) => {
                 return x.aid === props.aid;
               });
-              console.log(duplicate);
 
               setisLoading(true);
               Loading().then(() => {
@@ -185,7 +183,7 @@ function CurrentCalendarCard(props) {
             }}
           >
             {isDuplicate ? (
-              <i class="fas fa-times-circle mr-2"></i>
+              <i className="fas fa-times-circle mr-2"></i>
             ) : (
               <i className="far fa-plus-square mr-2"></i>
             )}

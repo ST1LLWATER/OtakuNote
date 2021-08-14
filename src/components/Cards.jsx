@@ -6,8 +6,9 @@ import CurrentCalendarCard from "./CurrentCalendarCard";
 
 function Cards(props) {
   let animesMap;
-  const { animes, authenticator, auth } = useContext(AnimeContext);
-  let { currentAnimes } = useContext(AnimeContext);
+  const { animes, authenticator, auth, currentAnimes } =
+    useContext(AnimeContext);
+
   props.type === "Current" ? (animesMap = currentAnimes) : (animesMap = animes);
   function showModal(id) {
     let newSelectedState = animes.find((x) => x.id === id);

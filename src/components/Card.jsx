@@ -120,7 +120,7 @@ function Card(props) {
               onClick={() => {
                 props.showModalFunction(props.id);
               }}
-              class="flex justify-center items-center p-2 w-1/2 mx-2 bg-blue-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
+              className="flex justify-center items-center p-2 w-1/2 mx-2 bg-blue-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
             >
               MORE INFO
             </button>

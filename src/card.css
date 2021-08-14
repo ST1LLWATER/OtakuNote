@@ -17,7 +17,8 @@ background: linear-gradient(to right, #414345, #232526); */
   /* overflow-x: auto; */
   width: 300px;
   height: 420px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 28%);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
