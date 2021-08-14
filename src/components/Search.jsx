@@ -179,7 +179,7 @@ function Search() {
             type="submit"
             className="px-4 py-2 rounded hover:bg-white hover:text-blue-700 bg-blue-700 text-white"
           >
-            INSERT
+            SEARCH
           </button>
           <button
             className={
