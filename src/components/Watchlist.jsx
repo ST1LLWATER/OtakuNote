@@ -1,4 +1,3 @@
-import Input from "./Input";
 import Cards from "./Cards";
 import { useContext, useEffect } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";

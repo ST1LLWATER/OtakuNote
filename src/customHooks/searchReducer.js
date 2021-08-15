@@ -13,6 +13,7 @@ function searchReducer(state, action) {
           date: action.anime.date,
           description: action.anime.description,
           banner: action.anime.banner,
+          nextEpisode: action.anime.nextEpisode,
           id: action.anime.id,
         },
       ];

@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
+let dayjs = require("dayjs");
 
 function Modal(props) {
   let newDescription = props.info.description.replace(/\([^\)]+?\)/g, "");
   const { auth } = useContext(AnimeContext);
   const [flipOut, setFlipOut] = useState(false);
+  console.log(props);
 
   useEffect(() => {
     if (auth.selectedState) {
@@ -54,11 +56,21 @@ function Modal(props) {
           </h1>
 
           <div
-            className="pb-14"
             dangerouslySetInnerHTML={{
               __html: newDescription,
             }}
           ></div>
+          {props.info.nextEpisode ? (
+            <div>
+              <p>
+                Next Episode At:{" "}
+                {dayjs(props.info.nextEpisode.airingAt * 1000).format(
+                  "D MMMM YYYY"
+                )}
+              </p>
+              <p>Time Remaining: </p>
+            </div>
+          ) : null}
           <button
             className="sticky bottom-0 ml-auto mr-2 mb-5 bg-red-500 hover:bg-yellow-300 hover:text-black text-white font-bold py-2 px-4 rounded"
             onClick={() => {

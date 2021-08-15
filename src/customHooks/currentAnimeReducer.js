@@ -13,6 +13,7 @@ function animeReducer(state, action) {
           episodes: action.anime.episodes,
           date: action.anime.date,
           banner: action.anime.banner,
+          nextEpisode: action.anime.nextEpisode,
           // id: Date.now(),
         },
       ];

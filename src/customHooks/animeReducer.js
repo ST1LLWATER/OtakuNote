@@ -10,6 +10,7 @@ function animeReducer(state, action) {
       }
 
     case "ADD_ANIME":
+      console.log(action.anime);
       let stateCopy = [
         {
           name: action.anime.name,
@@ -21,6 +22,7 @@ function animeReducer(state, action) {
           date: action.anime.date,
           description: action.anime.description,
           banner: action.anime.banner,
+          nextEpisode: action.anime.nextEpisode,
           id: action.anime.id,
         },
         ...state,

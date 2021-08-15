@@ -117,6 +117,7 @@ function CurrentCalendar() {
                 episodes: item.episodes,
                 date: item.startDate,
                 banner: item.bannerImage,
+                nextEpisode: item.nextAiringEpisode,
                 aid: item.id,
               },
             });

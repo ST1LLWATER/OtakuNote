@@ -36,6 +36,7 @@ function Cards(props) {
               description={anime.description}
               date={anime.date}
               banner={anime.banner}
+              nextEpisode={anime.nextEpisode}
             />
           );
         })}

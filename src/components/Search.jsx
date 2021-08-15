@@ -5,7 +5,6 @@ import CurrentCalendarCard from "./CurrentCalendarCard";
 function Search() {
   const [name, setName] = useState("");
   const [animeName, setAnimeName] = useState("");
-  const [searchData, setSearchData] = useState([]);
   const firstUpdate = useRef(true);
   const { searchAnimes, auth, search, authenticator, currentAnimeDispatch } =
     useContext(AnimeContext);
@@ -65,12 +64,12 @@ function Search() {
     })
       .then((r) => r.json())
       .then((data) => {
-        let pageInfo = data.data.Page.pageInfo;
         if (data.errors) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
           console.log(data);
           let apiData = data.data.Page.media;
+          console.log(apiData);
           apiData.map((item) => {
             if (auth.safeMode && item.isAdult) {
               return;
@@ -88,6 +87,7 @@ function Search() {
                   episodes: item.episodes,
                   date: item.startDate,
                   banner: item.bannerImage,
+                  nextEpisode: item.nextAiringEpisode,
                   aid: item.id,
                 },
               });
@@ -244,6 +244,7 @@ function Search() {
                   description={anime.description}
                   date={anime.date}
                   banner={anime.banner}
+                  nextEpisode={anime.nextEpisode}
                 />
               );
             })

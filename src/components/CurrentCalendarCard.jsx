@@ -70,6 +70,7 @@ function CurrentCalendarCard(props) {
         episodes: props.episodes,
         date: props.date,
         banner: props.banner,
+        nextEpisode: props.nextEpisode,
         id: Date.now(),
       },
     });

@@ -59,6 +59,8 @@ function Input() {
         if (data.errors || (auth.safeMode ? data.data.Media.isAdult : 0)) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
+          console.log(data.data.Media);
+
           dispatch({
             type: "ADD_ANIME",
             anime: {
@@ -73,6 +75,7 @@ function Input() {
               date: data.data.Media.startDate,
               description: data.data.Media.description,
               banner: data.data.Media.bannerImage,
+              nextEpisode: data.data.Media.nextAiringEpisode,
               id: Date.now(),
             },
           });
