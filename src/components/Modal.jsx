@@ -56,12 +56,13 @@ function Modal(props) {
           </h1>
 
           <div
+            className={props.info.nextEpisode ? "" : "pb-14"}
             dangerouslySetInnerHTML={{
               __html: newDescription,
             }}
           ></div>
           {props.info.nextEpisode ? (
-            <div>
+            <div className="pb-14">
               <p>
                 Next Episode At:{" "}
                 {dayjs(props.info.nextEpisode.airingAt * 1000).format(
