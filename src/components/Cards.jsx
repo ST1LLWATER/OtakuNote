@@ -70,7 +70,7 @@ function Cards(props) {
       <h1 className="text-4xl text-white mt-32 text-center">
         NO MORE ANIME ON WATCHLIST....
       </h1>
-      <p className="text-2xl text-white mt-32 text-center">Add Some More</p>
+      <p className="text-2xl text-white my-5 text-center">Add Some More</p>
     </>
   );
 }
