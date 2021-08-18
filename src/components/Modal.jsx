@@ -69,7 +69,8 @@ function Modal(props) {
                   "D MMMM YYYY"
                 )}
               </p>
-              <p>Time Remaining: </p>
+              {/* <p>Time Remaining: </p> */}
+              <p>Upcoming Episode No: {props.info.nextEpisode.episode}</p>
             </div>
           ) : null}
           <button
