@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { AnimeContext } from "../contexts/AnimeContext";
 import CurrentCalendarCard from "./CurrentCalendarCard";
+import Modal from "./Modal";
 
 function Search() {
   const [name, setName] = useState("");
@@ -8,6 +9,18 @@ function Search() {
   const firstUpdate = useRef(true);
   const { searchAnimes, auth, search, authenticator, currentAnimeDispatch } =
     useContext(AnimeContext);
+
+  function showModal(id, val = false) {
+    let aid = id;
+    let newSelectedState = search.find((x) => x.aid === aid);
+    authenticator({ type: "SET_SELECTED_STATE", payload: newSelectedState });
+  }
+
+  function hideModal() {
+    document.body.style.overflow = "auto";
+    authenticator({ type: "NULLIFER" });
+  }
+
   //FETCHING DATA FROM API AND SENDING TO REDUCER TO ADD IT TO ANIMES STATE OF REDUCER
   function DataFetcher(searchName) {
     // console.log(searchName, typeof searchName);
@@ -64,12 +77,11 @@ function Search() {
     })
       .then((r) => r.json())
       .then((data) => {
-        if (data.errors) {
+        if (data.errors || !data.data.Page.media.length) {
           alert("ANIME NAME NOT FOUND... BE MORE SPECIFIC");
         } else {
           console.log(data);
           let apiData = data.data.Page.media;
-          console.log(apiData);
           apiData.map((item) => {
             if (auth.safeMode && item.isAdult) {
               return;
@@ -245,11 +257,19 @@ function Search() {
                   date={anime.date}
                   banner={anime.banner}
                   nextEpisode={anime.nextEpisode}
+                  showModalFunction={showModal}
                 />
               );
             })
           : ""}
       </div>
+      {auth.selectedState && (
+        <Modal
+          info={auth.selectedState}
+          onClose={hideModal}
+          onGoingCard={true}
+        />
+      )}
     </div>
   );
 }

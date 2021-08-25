@@ -148,54 +148,63 @@ function CurrentCalendarCard(props) {
               );
             })}
           </div>
-
-          <button
-            id="add"
-            className={
-              (isLoading
-                ? "bg-yellow-300 text-gray-900 "
-                : success
-                ? "bg-green-600 text-white "
-                : isDuplicate
-                ? "bg-red-600 text-white "
-                : "bg-blue-600 text-white ") +
-              "flex justify-center  items-center p-2 w-full mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
-            }
-            onClick={() => {
-              // console.log(isDuplicate);
-              let duplicate = animes.find((x) => {
-                return x.aid === props.aid;
-              });
-
-              setisLoading(true);
-              Loading().then(() => {
+          <div className="button flex">
+            <button
+              id="add"
+              className={
+                (isLoading
+                  ? "bg-yellow-300 text-gray-900 "
+                  : success
+                  ? "bg-green-600 text-white "
+                  : isDuplicate
+                  ? "bg-red-600 text-white "
+                  : "bg-blue-600 text-white ") +
+                "flex justify-center  items-center p-2 w-1/2 mx-auto rounded-md text-white active:text-gray-900 active:bg-gray-200"
+              }
+              onClick={() => {
                 // console.log(isDuplicate);
-                if (duplicate) {
-                  // console.log("IF RAN");
-                  duplicateWatchlist();
-                  setisLoading(false);
-                } else {
-                  // console.log("ELSE RAN");
-                  handleAdd();
-                  successFunction();
-                  setisLoading(false);
-                }
-              });
-            }}
-          >
-            {isDuplicate ? (
-              <i className="fas fa-times-circle mr-2"></i>
-            ) : (
-              <i className="far fa-plus-square mr-2"></i>
-            )}
-            {isLoading
-              ? "LOADING"
-              : success
-              ? "SUCCESS"
-              : isDuplicate
-              ? "ON WATCHLIST"
-              : "WATCHLIST"}
-          </button>
+                let duplicate = animes.find((x) => {
+                  return x.aid === props.aid;
+                });
+
+                setisLoading(true);
+                Loading().then(() => {
+                  // console.log(isDuplicate);
+                  if (duplicate) {
+                    // console.log("IF RAN");
+                    duplicateWatchlist();
+                    setisLoading(false);
+                  } else {
+                    // console.log("ELSE RAN");
+                    handleAdd();
+                    successFunction();
+                    setisLoading(false);
+                  }
+                });
+              }}
+            >
+              {isDuplicate ? (
+                <i className="fas fa-times-circle mr-2"></i>
+              ) : (
+                <i className="far fa-plus-square mr-2"></i>
+              )}
+              {isLoading
+                ? "LOADING"
+                : success
+                ? "SUCCESS"
+                : isDuplicate
+                ? "INCLUDED"
+                : "WATCHLIST"}
+            </button>
+            <button
+              onClick={() => {
+                props.showModalFunction(props.aid, true);
+              }}
+              className="flex justify-center items-center p-2 w-1/2 mx-2 bg-pink-600 rounded-md text-white active:text-red-600 active:bg-gray-200 hover:text-red-600 hover:bg-gray-200"
+            >
+              MORE INFO
+            </button>
+          </div>
         </div>
       </div>
     </>

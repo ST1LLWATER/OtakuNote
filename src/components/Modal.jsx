@@ -4,9 +4,16 @@ let dayjs = require("dayjs");
 
 function Modal(props) {
   let newDescription = props.info.description.replace(/\([^\)]+?\)/g, "");
+  const [isOngoingCard, setOngoingCard] = useState(false);
   const { auth } = useContext(AnimeContext);
   const [flipOut, setFlipOut] = useState(false);
   console.log(props);
+
+  useEffect(() => {
+    if (props.onGoingCard) {
+      setOngoingCard(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (auth.selectedState) {
@@ -56,12 +63,12 @@ function Modal(props) {
           </h1>
 
           <div
-            className={props.info.nextEpisode ? "" : "pb-14"}
+            className={props.info.nextEpisode ? "pb-8" : ""}
             dangerouslySetInnerHTML={{
               __html: newDescription,
             }}
           ></div>
-          {props.info.nextEpisode ? (
+          {isOngoingCard && props.info.nextEpisode ? (
             <div className="pb-14">
               <p>
                 Next Episode At:{" "}

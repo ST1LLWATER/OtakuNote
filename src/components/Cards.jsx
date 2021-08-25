@@ -10,9 +10,15 @@ function Cards(props) {
     useContext(AnimeContext);
 
   props.type === "Current" ? (animesMap = currentAnimes) : (animesMap = animes);
-  function showModal(id) {
-    let newSelectedState = animes.find((x) => x.id === id);
-    authenticator({ type: "SET_SELECTED_STATE", payload: newSelectedState });
+  function showModal(id, val = false) {
+    if (val) {
+      let aid = id;
+      let newSelectedState = currentAnimes.find((x) => x.aid === aid);
+      authenticator({ type: "SET_SELECTED_STATE", payload: newSelectedState });
+    } else {
+      let newSelectedState = animes.find((x) => x.id === id);
+      authenticator({ type: "SET_SELECTED_STATE", payload: newSelectedState });
+    }
   }
 
   function hideModal() {
@@ -37,9 +43,18 @@ function Cards(props) {
               date={anime.date}
               banner={anime.banner}
               nextEpisode={anime.nextEpisode}
+              showModalFunction={showModal}
+              isOngoing={true}
             />
           );
         })}
+        {auth.selectedState && (
+          <Modal
+            info={auth.selectedState}
+            onClose={hideModal}
+            onGoingCard={true}
+          />
+        )}
       </div>
     ) : (
       <div className="cards grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 my-10 justify-items-center ">
@@ -61,7 +76,11 @@ function Cards(props) {
           );
         })}
         {auth.selectedState && (
-          <Modal info={auth.selectedState} onClose={hideModal} />
+          <Modal
+            info={auth.selectedState}
+            onClose={hideModal}
+            onGoingCard={false}
+          />
         )}
       </div>
     )
