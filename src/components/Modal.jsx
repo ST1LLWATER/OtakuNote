@@ -71,7 +71,7 @@ function Modal(props) {
           {isOngoingCard && props.info.nextEpisode ? (
             <div className="pb-14">
               <p>
-                Next Episode At:{" "}
+                Next Episode On:{" "}
                 {dayjs(props.info.nextEpisode.airingAt * 1000).format(
                   "D MMMM YYYY"
                 )}
