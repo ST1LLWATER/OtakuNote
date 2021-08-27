@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaGithub } from "react-icons/fa";
 
 function Nav() {
   return (
@@ -19,6 +20,13 @@ function Nav() {
           <Link to="/current" className="px-4 py-2 hover:text-white">
             ONGOING ANIMES
           </Link>
+          <a
+            href="https://github.com/ST1LLWATER"
+            target="_blank"
+            className="px-4 py-2 hover:text-white text-2xl"
+          >
+            <FaGithub />
+          </a>
         </nav>
       </div>
     </header>
