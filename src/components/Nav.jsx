@@ -20,7 +20,7 @@ function Nav() {
           </NavLink>
           <NavLink
             activeClassName="active_link"
-            to="/watchlist"
+            to="/"
             className=" px-4 py-2 hover:text-white"
           >
             WATCHLIST

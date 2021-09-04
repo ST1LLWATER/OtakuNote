@@ -12,7 +12,7 @@ function App() {
       <Nav />
       <Switch>
         <Route exact path="/search" component={SearchRenderer} />
-        <Route exact path="/watchlist" component={Watchlist} />
+        <Route exact path="/" component={Watchlist} />
         <Route exact path="/current" component={CurrentCalendarRenderer} />
       </Switch>
     </AnimeContextProvider>
