@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 
 function Nav() {
@@ -11,15 +11,27 @@ function Nav() {
           </span>
         </div>
         <nav className="md:ml-auto flex flex-wrap justify-center items-center text-lg ">
-          <Link to="/search" className="px-4 py-2 hover:text-white">
+          <NavLink
+            activeClassName="active_link"
+            to="/search"
+            className="px-4 py-2 hover:text-white"
+          >
             SEARCH
-          </Link>
-          <Link to="/" className=" px-4 py-2 hover:text-white">
+          </NavLink>
+          <NavLink
+            activeClassName="active_link"
+            to="/watchlist"
+            className=" px-4 py-2 hover:text-white"
+          >
             WATCHLIST
-          </Link>
-          <Link to="/current" className="px-4 py-2 hover:text-white">
+          </NavLink>
+          <NavLink
+            activeClassName="active_link"
+            to="/current"
+            className="px-4 py-2 hover:text-white"
+          >
             ONGOING ANIMES
-          </Link>
+          </NavLink>
           <a
             href="https://github.com/ST1LLWATER"
             target="_blank"
