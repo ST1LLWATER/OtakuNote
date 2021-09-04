@@ -12,6 +12,7 @@ function Nav() {
         </div>
         <nav className="md:ml-auto flex flex-wrap justify-center items-center text-lg ">
           <NavLink
+            exact
             activeClassName="active_link"
             to="/search"
             className="px-4 py-2 hover:text-white"
@@ -19,6 +20,7 @@ function Nav() {
             SEARCH
           </NavLink>
           <NavLink
+            exact
             activeClassName="active_link"
             to="/"
             className=" px-4 py-2 hover:text-white"
@@ -26,6 +28,7 @@ function Nav() {
             WATCHLIST
           </NavLink>
           <NavLink
+            exact
             activeClassName="active_link"
             to="/current"
             className="px-4 py-2 hover:text-white"
