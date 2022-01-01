@@ -145,7 +145,7 @@ function CurrentCalendar() {
     CurrentDataFetcher();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return currentAnimes.length > 1 ? (
+  return currentAnimes.length > 0 ? (
     <Cards type="Current" />
   ) : (
     <div className="text-4xl text-white mt-32 text-center"> Loading.... </div>
