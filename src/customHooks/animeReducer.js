@@ -9,6 +9,9 @@ function animeReducer(state, action) {
         return [...state];
       }
 
+    case "LOAD_DATABASE_ANIMES":
+      return action.animes;
+
     case "ADD_ANIME":
       let stateCopy = [
         {

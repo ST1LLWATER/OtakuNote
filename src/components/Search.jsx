@@ -125,7 +125,6 @@ function Search() {
   //LOADING ANIMES FROM LOCAL STORAGE AND IF WE GOT NEW ANIME REQ FROM INPUT i.e. animeName state changed above SEND THAT ANIME REQ TO API
   useEffect(() => {
     if (animeName) {
-      console.log(animeName, typeof animeName);
       searchAnimes({ type: "CLEAR" });
       //If to prevent sending an empty req to API as use effect runs when DOM loads too and animeName is "" i.e false at beginning
       DataFetcher(animeName);

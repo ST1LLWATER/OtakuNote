@@ -7,7 +7,6 @@ function Modal(props) {
   const [isOngoingCard, setOngoingCard] = useState(false);
   const { auth } = useContext(AnimeContext);
   const [flipOut, setFlipOut] = useState(false);
-  console.log(props);
 
   useEffect(() => {
     if (props.onGoingCard) {

@@ -1,10 +1,41 @@
+import { useEffect, useState, useContext } from "react";
+import { AnimeContext } from "../contexts/AnimeContext";
 import { NavLink } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
+import supabase from "../supabase";
 
 function Nav() {
+  const [user, setUser] = useState(null);
+  const { syncWatchlist, loadWatchlist } = useContext(AnimeContext);
+
+  useEffect(() => {
+    const user = supabase.auth.user();
+    if (user) {
+      setUser(user.user_metadata);
+    }
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+      if (event === "SIGNED_IN") {
+        setUser(session.user.user_metadata);
+        loadWatchlist();
+      }
+      if (event === "SIGNED_OUT") setUser(null);
+    });
+  });
+
+  async function signInWithDiscord() {
+    const { user, session, error } = await supabase.auth.signIn({
+      provider: "discord",
+    });
+  }
+  async function signout() {
+    const { error } = await supabase.auth.signOut();
+    console.log({ error });
+  }
+
   return (
     <header className="text-gray-400 bg-gray-900 body-font">
-      <div className="w-full flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <div className="w-full flex flex-wrap px-5 py-4 flex-col md:flex-row items-center">
         <div className="flex title-font font-medium items-center  text-white mb-4 md:mb-0">
           <span className="ml-3 cursor-default text-2xl">
             {"STILLWATER </>"}
@@ -17,7 +48,7 @@ function Nav() {
             to="/search"
             className="px-4 py-2 hover:text-white"
           >
-            SEARCH
+            Search
           </NavLink>
           <NavLink
             exact
@@ -25,7 +56,7 @@ function Nav() {
             to="/"
             className=" px-4 py-2 hover:text-white"
           >
-            WATCHLIST
+            Watchlist
           </NavLink>
           <NavLink
             exact
@@ -33,8 +64,26 @@ function Nav() {
             to="/current"
             className="px-4 py-2 hover:text-white"
           >
-            ONGOING ANIMES
+            Ongoing
           </NavLink>
+          <button
+            className="px-4 py-2 hover:text-white"
+            onClick={!user ? signInWithDiscord : null}
+          >
+            {user ? user.full_name : "Login"}
+          </button>
+          <button
+            className={`px-4 py-2 hover:text-white ${user ? "" : "hidden"}`}
+            onClick={signout}
+          >
+            {user ? "Logout" : null}
+          </button>
+          <button
+            className={`px-4 py-2 hover:text-white ${user ? "" : "hidden"}`}
+            onClick={syncWatchlist}
+          >
+            Sync
+          </button>
           <a
             href="https://github.com/ST1LLWATER"
             target="_blank"

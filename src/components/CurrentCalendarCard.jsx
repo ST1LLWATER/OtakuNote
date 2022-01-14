@@ -3,7 +3,7 @@ import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
 function CurrentCalendarCard(props) {
-  const { dispatch, animes } = useContext(AnimeContext);
+  const { dispatch, animes, setWatchlist } = useContext(AnimeContext);
   const [isLoading, setisLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isDuplicate, setIsDuplicate] = useState(false);
@@ -74,6 +74,7 @@ function CurrentCalendarCard(props) {
         id: Date.now(),
       },
     });
+    setWatchlist();
   }
 
   function successFunction() {
