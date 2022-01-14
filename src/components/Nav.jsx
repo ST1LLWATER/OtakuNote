@@ -6,7 +6,15 @@ import supabase from "../supabase";
 
 function Nav() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
   const { syncWatchlist, loadWatchlist } = useContext(AnimeContext);
+
+  const Loading = () => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  };
 
   useEffect(() => {
     const user = supabase.auth.user();
@@ -14,14 +22,13 @@ function Nav() {
       setUser(user.user_metadata);
     }
     supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
       if (event === "SIGNED_IN") {
         setUser(session.user.user_metadata);
         loadWatchlist();
       }
       if (event === "SIGNED_OUT") setUser(null);
     });
-  });
+  }, [loadWatchlist]);
 
   async function signInWithDiscord() {
     const { user, session, error } = await supabase.auth.signIn({
@@ -80,9 +87,17 @@ function Nav() {
           </button>
           <button
             className={`px-4 py-2 hover:text-white ${user ? "" : "hidden"}`}
-            onClick={syncWatchlist}
+            onClick={() => {
+              setLoading(true);
+              syncWatchlist();
+              Loading().then(() => {
+                setLoading(false);
+                setDone(true);
+                Loading().then(() => setDone(false));
+              });
+            }}
           >
-            Sync
+            {loading ? "Wait" : done ? "Done" : "Sync"}
           </button>
           <a
             href="https://github.com/ST1LLWATER"

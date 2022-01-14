@@ -34,7 +34,6 @@ function AnimeContextProvider(props) {
     } else {
       items = [];
     }
-    console.log(items);
     setWatchlist(items);
   }
 

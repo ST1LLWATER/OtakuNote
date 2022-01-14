@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, memo } from "react";
 import "../card.css";
 import { AnimeContext } from "../contexts/AnimeContext";
 
@@ -212,4 +212,4 @@ function CurrentCalendarCard(props) {
   );
 }
 
-export default CurrentCalendarCard;
+export default memo(CurrentCalendarCard);
