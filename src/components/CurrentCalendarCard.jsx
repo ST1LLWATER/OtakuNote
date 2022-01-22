@@ -74,7 +74,6 @@ function CurrentCalendarCard(props) {
         id: Date.now(),
       },
     });
-    setWatchlist();
   }
 
   function successFunction() {

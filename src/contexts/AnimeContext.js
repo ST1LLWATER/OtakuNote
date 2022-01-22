@@ -22,7 +22,7 @@ function AnimeContextProvider(props) {
       .eq("email", user.email);
 
     data = data[0].watchlist;
-
+    localStorage.setItem("list", JSON.stringify(data));
     dispatch({ type: "LOAD_DATABASE_ANIMES", animes: data });
   }
 

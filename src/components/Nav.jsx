@@ -26,7 +26,9 @@ function Nav() {
         setUser(session.user.user_metadata);
         loadWatchlist();
       }
-      if (event === "SIGNED_OUT") setUser(null);
+      if (event === "SIGNED_OUT") {
+        setUser(null);
+      }
     });
   }, [loadWatchlist]);
 
