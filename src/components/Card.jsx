@@ -47,9 +47,7 @@ function Card(props) {
     const scroll = x - startX;
     slider.current.scrollLeft = scrollLeft - scroll;
   }
-  // let description = props.description;
-  // let newDescription = description.replace(/\<[^>]+?>/, "");
-  // console.log(props);
+
 
   return (
     <>
